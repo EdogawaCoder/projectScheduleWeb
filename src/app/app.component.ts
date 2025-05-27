@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,5 +9,17 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'projectScheduleWeb';
+  
+    //criando um objeto da classe HttpClient
+    private http = inject(HttpClient);
+
+    //função executada sempre que a página é aberta
+    ngOnInit() {
+
+      //executando uma requisição para o endpoint de consulta de categorias
+      this.http.get('http://localhost:8081/api/v1/categories') 
+        .subscribe((dados) => { //capturando os dados obtidos
+            console.table(dados);
+        });
+    }
 }
