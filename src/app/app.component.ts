@@ -1,25 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,
+    NavbarComponent
+
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   
-    //criando um objeto da classe HttpClient
-    private http = inject(HttpClient);
 
-    //função executada sempre que a página é aberta
-    ngOnInit() {
 
-      //executando uma requisição para o endpoint de consulta de categorias
-      this.http.get('http://localhost:8081/api/v1/categories') 
-        .subscribe((dados) => { //capturando os dados obtidos
-            console.table(dados);
-        });
-    }
 }
