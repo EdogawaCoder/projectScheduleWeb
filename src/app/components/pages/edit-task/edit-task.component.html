@@ -1,1 +1,72 @@
-<p>edit-task works!</p>
+<div class="container mt-3">
+  <div class="card shadow">
+    <div class="card-body">
+      <h2 class="card-title mb-3">Edit task form</h2>
+      <p class="card-text">Update the fields as you wish to change the task</p>
+      <hr />
+
+      <div *ngIf="message" class="alert alert-success">
+        <strong> {{message}} </strong>
+
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label">Task title:</label>
+          <input type="text" formControlName="title" class="form-control"
+            placeholder="Type your title here" />
+          <div class="text-danger" *ngIf="form.get('title')?.touched">
+            <span *ngIf="form.get('title')?.hasError('required')">Please, fill the task title.</span>
+            <span *ngIf="form.get('title')?.hasError('minlength')">Please, fill the title with at least 8
+              characters.</span>
+            <span *ngIf="form.get('title')?.hasError('maxlength')">Please, fill the title with a maximum of 100
+              characters.</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Date of task:</label>
+          <input type="date" formControlName="date" class="form-control" />
+          <div class="text-danger" *ngIf="form.get('date')?.touched">
+            <span *ngIf="form.get('date')?.hasError('required')">Please, fill the task date.</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Hour of Task:</label>
+          <input type="time" formControlName="hour" class="form-control" />
+          <div class="text-danger" *ngIf="form.get('hour')?.touched">
+            <span *ngIf="form.get('hour')?.hasError('required')">Please, fill the task hour.</span>
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <label class="form-label">Task finished?</label>
+          <div>
+            <input type="radio" formControlName="done" [value]="true" /> Sim &nbsp;
+            <input type="radio" formControlName="done" [value]="false" /> Não
+          </div>
+          <div class="text-danger" *ngIf="form.get('done')?.touched">
+            <span *ngIf="form.get('done')?.hasError('required')">Please, fill if the task is done.</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Task category:</label>
+          <select formControlName="idCategory" class="form-select">
+            <option value="">Choose the category</option>
+            <option *ngFor="let c of categorias" [value]="c.id">{{ c.name }}</option>
+          </select>
+          <div class="text-danger" *ngIf="form.get('idCategory')?.touched">
+            <span *ngIf="form.get('idCategory')?.hasError('required')">Please, select the task category.</span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="form.invalid" class="btn btn-primary">
+          Update Task
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>

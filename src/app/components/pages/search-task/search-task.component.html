@@ -5,9 +5,39 @@
       <p class="card-text">List of tasks registered</p>
       <hr />
 
+      <table class = "table table-sm table-responsive">
+        <thead>
+         <tr> 
+          <th> Title </th>
+          <th> Date </th>
+          <th> Hour </th>
+          <th> Done </th>
+          <th> Category </th>
+          <th> Actions </th>
+        </tr>
+        </thead>
+        
+        <tbody>
+          <tr *ngFor="let t of tasks">
+            <td>{{t.title | uppercase}}</td>
+            <td>{{t.date | date : 'dd/MM/yyyy'}}</td>
+            <td>{{t.hour}}</td>
+            <td>{{t.done}}</td>
+            <td>{{t.category.name}}</td>
+          <td>
+            <button [routerLink]="['/pages/edit-task',t.id]"  class ="btn btn-primary btn-sm me-2"> Edit</button>
+            <button (click) = "onDelete(t)"  class ="btn btn-danger btn-sm me-2"> 
+              Delete
+            </button>
+          </td>
+        </tbody>
+        <tr>
+          <td colspan="6">
+            Quantity of tasks: {{tasks.length}}
+          </td>
+        </tr>
 
-
-
+      </table>
 
     </div>
   </div>

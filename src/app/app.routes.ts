@@ -14,7 +14,7 @@ export const routes: Routes = [
         component: SearchTaskComponent
     },
     {
-        path: 'pages/edit-task',
+        path: 'pages/edit-task/:id',
         component: EditTaskComponent
     }
 ];
